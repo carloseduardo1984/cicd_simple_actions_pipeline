@@ -10,13 +10,13 @@ jobs:
     name: Deploy to DEV
     runs-on: ubuntu-latest
     steps:
-      - run: echo Deploy to DEV using ${{ secrets.mysecret-stag }}
+      - run: echo Deploy to dev using ${{ secrets.mysecret-dev }}
       
   deploy-qa:
     name: Deploy to QA - Testing
     runs-on: ubuntu-latest
     steps:
-      - run: echo Deploy to QA using ${{ secrets.mysecret-stag }}
+      - run: echo Deploy to qa using ${{ secrets.mysecret-qa }}
       
   deploy-staging:
     name: Deploy to staging
