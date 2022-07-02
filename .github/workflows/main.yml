@@ -1,0 +1,56 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Frontend CI
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events
+  push:
+    branches: [ dev, master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
+jobs:
+  dev_deploy:
+    # The type of runner that the job will run on
+    runs-on: [self-hosted, development]
+    # look at the ref and only run this job if the branch that triggered the workflow is "dev"
+    if: endswith(github.ref, 'dev')
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+    - run: npm install
+    - run: npm run test
+    - run: npm run build
+    - run: pm2 start
+  prod_deploy:
+    # The type of runner that the job will run on
+    runs-on: [self-hosted, production]
+    # look at the ref and only run this job if the branch that triggered the workflow is master
+    if: endswith(github.ref, 'master')
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+    - run: npm install
+    - run: npm run test
+    - run: npm run build
+    - run: pm2 start
+  
+  notify:
+    needs: prod_deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Slack Notify
+      uses: rtCamp/action-slack-notify@v2.1.3
+    env:
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
