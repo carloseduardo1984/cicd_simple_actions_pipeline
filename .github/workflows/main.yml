@@ -7,13 +7,13 @@ on:
 jobs:
         
   deploy-dev:
-    name: Deploy to DEV
+    name: Deploy to dev
     runs-on: ubuntu-latest
     steps:
       - run: echo Deploy to dev using ${{ secrets.mysecret-dev }}
       
   deploy-qa:
-    name: Deploy to QA - Testing
+    name: Deploy to qa
     runs-on: ubuntu-latest
     steps:
       - run: echo Deploy to qa using ${{ secrets.mysecret-qa }}
