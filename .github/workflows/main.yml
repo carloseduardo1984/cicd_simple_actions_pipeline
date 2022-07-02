@@ -14,12 +14,14 @@ jobs:
       
   deploy-qa:
     name: Deploy to qa
+    needs: [deploy-dev]
     runs-on: ubuntu-latest
     steps:
       - run: echo Deploy to qa using ${{ secrets.mysecret-qa }}
       
   deploy-staging:
     name: Deploy to staging
+    needs: [deploy-qa]
     runs-on: ubuntu-latest
     steps:
       - run: echo Deploy to staging using ${{ secrets.mysecret-stag }}
