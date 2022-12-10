@@ -1,4 +1,4 @@
-name:  Deploy
+name:  Pipeline_Dev
 
 on:
 #   push:
@@ -36,9 +36,9 @@ jobs:
       - run: echo DEPLOY/LANCAMENTO DA VERSAO/RELEASE DO PROJETO
         
       - name: Merge staging -> uat
-        uses: devmasx/merge-branch@master
+        uses: tukasz/direct-merge-action@master
         with:
-          type: now
-          from_branch: dev
-          target_branch: main
-          github_token: ${{ GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          source-branch: dev
+          target-branch: main
+          commit-message: "Main updated with automatic merge"
