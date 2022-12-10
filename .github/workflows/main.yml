@@ -1,8 +1,6 @@
-name:  Deploy
+name:  Pipeline
 
 on:
-#   push:
-#     branches: [ main ]
     
   workflow_dispatch:
 
@@ -34,8 +32,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo DEPLOY/LANCAMENTO DA VERSAO/RELEASE DO PROJETO
-      - uses: everlytic/branch-merge@1.1.2
-        with:          
-          source_ref: 'dev'
-          target_branch: 'main'
-          commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'   
+      
+      - name: Merge master -> compiled-master
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+            type: now
+            from_branch: dev
+            target_branch: main
+            github_token: ${{ GITHUB_TOKEN }}
