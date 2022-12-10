@@ -37,6 +37,6 @@ jobs:
         uses: tukasz/direct-merge-action@master
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
-          source-branch: dev
+          source-branch: qa
           target-branch: main
           commit-message: "Automatic Merge"
