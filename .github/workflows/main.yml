@@ -33,7 +33,7 @@ jobs:
     steps:
       - run: echo DEPLOY/LANCAMENTO DA VERSAO/RELEASE DO PROJETO
       
-      - name: Merge master -> compiled-master
+      - name: Merge qa -> compiled-main
         uses: tukasz/direct-merge-action@master
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
