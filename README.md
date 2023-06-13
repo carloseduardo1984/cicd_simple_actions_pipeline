@@ -2,4 +2,4 @@
 
 simple CICD example_
 ---- teste na branch de qa teste
-updates teste 2 3 4 5
+updates teste 2 3 4 5 6
