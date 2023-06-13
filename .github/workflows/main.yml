@@ -2,11 +2,14 @@ name:  Pipeline_qa
 
 on:
 
- push:                   # EXECUÇÃO A CADA PUSH NA BRANCH MAIN
-    branches:  teste
+  push:
+    branches:
+      - teste
+  pull_request:
+    branches:
+      - teste
       
-    
- workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
         
